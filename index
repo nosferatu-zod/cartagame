@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Pombo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #87CEEB;
+            font-family: Arial, sans-serif;
+            transition: all 0.5s ease;
+        }
+        #game-container {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            border: 2px solid #000;
+            background-color: #FFF;
+        }
+        #pigeon {
+            width: 50px;
+            height: 50px;
+            background-image: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3MyZGgxZ2k2dGZlNzN3aHlsczBnMHR0NXB3Z2MzbnJwbDNjNzNvNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9MImRVdVpTDvnyLMma/giphy.gif'); /* Coloque a URL da imagem de um pombo */
+            background-size: cover;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 1.5s ease; /* Transição suave */
+        }
+        #message {
+            display: none;
+            font-size: 3em;
+            color: white;
+            text-align: center;
+        }
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: 3;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .hidden {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="pigeon"></div>
+    </div>
+    <div id="message">
+        <div class="heart">♥</div>
+        <br>
+        <span id="word1" class="hidden">EU</span>
+        <span id="word2" class="hidden">TE</span>
+        <span id="word3" class="hidden">AMO!</span>
+        <br>
+        <div class="heart">♥</div>
+    </div>
+
+    <script>
+        const pigeon = document.getElementById('pigeon');
+        const container = document.getElementById('game-container');
+        const message = document.getElementById('message');
+
+        const word1 = document.getElementById('word1');
+        const word2 = document.getElementById('word2');
+        const word3 = document.getElementById('word3');
+
+        function movePigeon(event) {
+            const maxX = container.clientWidth - pigeon.offsetWidth;
+            const maxY = container.clientHeight - pigeon.offsetHeight;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            pigeon.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function showMessage() {
+            setTimeout(() => {
+                word1.classList.remove('hidden');
+                document.body.classList.add('shake');
+            }, 500);
+            setTimeout(() => {
+                word2.classList.remove('hidden');
+                document.body.classList.add('shake');
+            }, 1000);
+            setTimeout(() => {
+                word3.classList.remove('hidden');
+                document.body.classList.add('shake');
+            }, 1500);
+        }
+
+        pigeon.addEventListener('mouseover', movePigeon);
+
+        pigeon.addEventListener('click', function() {
+            container.style.display = 'none'; // Oculta o contêiner
+            document.body.style.backgroundColor = '#000';
+            message.style.display = 'block';
+            showMessage(); // Exibe as palavras e treme a tela
+        });
+
+        movePigeon(); // Posiciona o pombo inicialmente
+    </script>
+</body>
+</html>
