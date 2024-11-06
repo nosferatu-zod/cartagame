@@ -30,7 +30,7 @@
             background-size: cover;
             position: absolute;
             cursor: pointer;
-            transition: transform 0.5s ease; /* Transição suave */
+            transition: transform 1.5s ease; /* Transição suave */
         }
         #message {
             display: none;
@@ -67,9 +67,9 @@
     <div id="message">
         <div class="heart">♥</div>
         <br>
-        <span id="word1" class="hidden">EU</span>
-        <span id="word2" class="hidden">TE</span>
-        <span id="word3" class="hidden">AMO!</span>
+        <span id="word1" class="hidden">Você</span>
+        <span id="word2" class="hidden">é</span>
+        <span id="word3" class="hidden">Maravilhosa!</span>
         <br>
         <div class="heart">♥</div>
     </div>
@@ -83,7 +83,7 @@
         const word2 = document.getElementById('word2');
         const word3 = document.getElementById('word3');
 
-        function movePigeon(event) {
+        function movePigeon() {
             const maxX = container.clientWidth - pigeon.offsetWidth;
             const maxY = container.clientHeight - pigeon.offsetHeight;
             const x = Math.random() * maxX;
@@ -105,6 +105,9 @@
                 document.body.classList.add('shake');
             }, 1500);
         }
+
+        // Movimenta o pombo automaticamente a cada 3 segundos
+        setInterval(movePigeon, 2000);
 
         pigeon.addEventListener('mouseover', movePigeon);
 
